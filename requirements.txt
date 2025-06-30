@@ -1,0 +1,7 @@
+matplotlib~=3.10.1
+pandas~=2.2.3
+scikit-learn~=1.6.1
+tqdm~=4.67.1
+dotenv~=0.9.9
+python-dotenv~=1.1.1
+Telethon~=1.40.0
