@@ -1,10 +1,13 @@
-import argparse, glob, json, re
+import argparse
+import glob
+import json
+import re
 from pathlib import Path
 
 import pandas as pd
-from tqdm.auto import tqdm
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+from tqdm.auto import tqdm
 
 # аргументы
 ap = argparse.ArgumentParser()

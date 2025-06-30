@@ -1,4 +1,6 @@
-import os, asyncio, argparse
+import argparse
+import asyncio
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -12,10 +14,10 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="Выгружает сообщения из публичного канала Telegram → CSV"
     )
-    p.add_argument("--chat",  help="@username или slug канала (без https://t.me/)")
+    p.add_argument("--chat", help="@username или slug канала (без https://t.me/)")
     p.add_argument("--limit", type=int, default=1000,
                    help="Сколько последних сообщений (по-умолчанию 1000; 0 = всё)")
-    p.add_argument("--out",   help="Итоговый CSV (формируется автоматически)")
+    p.add_argument("--out", help="Итоговый CSV (формируется автоматически)")
     p.add_argument("--session", default="parser_session",
                    help="Имя файла сессии Telethon (.session)")
 
@@ -31,7 +33,7 @@ def parse_args():
 def load_credentials():
     load_dotenv()
     try:
-        api_id   = int(os.getenv("API_ID"))
+        api_id = int(os.getenv("API_ID"))
         api_hash = os.getenv("API_HASH")
         if not api_hash:
             raise ValueError
@@ -43,7 +45,7 @@ def load_credentials():
 # 3. Сбор сообщений
 async def dump_messages(client: TelegramClient, chat: str, limit: int | None):
     entity = await client.get_entity(chat)
-    rows   = []
+    rows = []
 
     async for m in client.iter_messages(entity, limit=None if limit == 0 else limit):
         if not m.message:
@@ -52,7 +54,7 @@ async def dump_messages(client: TelegramClient, chat: str, limit: int | None):
         if isinstance(await m.get_sender(), types.User):
             sender = await m.get_sender()
             author = " ".join(filter(None, [sender.first_name, sender.last_name])) \
-                    or (f"@{sender.username}" if sender.username else str(sender.id))
+                     or (f"@{sender.username}" if sender.username else str(sender.id))
         else:
             author = m.post_author or ""
 
