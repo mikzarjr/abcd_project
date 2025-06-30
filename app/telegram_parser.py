@@ -14,7 +14,7 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="Выгружает сообщения из публичного канала Telegram → CSV"
     )
-    p.add_argument("--chat", help="@username или slug канала (без https://t.me/)")
+    p.add_argument("--chat", help="@username канала (без https://t.me/)")
     p.add_argument("--limit", type=int, default=1000,
                    help="Сколько последних сообщений (по-умолчанию 1000; 0 = всё)")
     p.add_argument("--out", help="Итоговый CSV (формируется автоматически)")
@@ -23,7 +23,7 @@ def parse_args():
 
     args = p.parse_args()
     if not args.chat:
-        args.chat = input("Введите slug/@username канала: ").strip().lstrip("@")
+        args.chat = input("Введите @username канала: ").strip().lstrip("@")
     if not args.out:
         args.out = f"data/{args.chat}_messages.csv"
     return args

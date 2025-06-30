@@ -1,4 +1,7 @@
-import argparse, glob, pandas as pd, matplotlib.pyplot as plt
+import argparse
+import glob
+import matplotlib.pyplot as plt
+import pandas as pd
 from pathlib import Path
 
 # 1. аргументы
@@ -13,7 +16,6 @@ if not args.in_file:
     cands = sorted(glob.glob("data/*messages*.csv"))
     if cands:
         args.in_file = cands[0]
-        print(f"[INFO] Файл не указан — использую {args.in_file}")
     else:
         args.in_file = input("Введите путь к CSV с сообщениями: ").strip()
 
