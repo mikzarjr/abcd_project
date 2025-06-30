@@ -42,7 +42,7 @@ warnings.filterwarnings("ignore", message="Glyph.*missing")
 
 emoji = re.compile('[\U00010000-\U0010FFFF]', flags=re.UNICODE)
 stats['author'] = stats['author'].str.replace(emoji, '', regex=True)
-# 4. сохраняем график TOP‑10, если не отключён флагом
+# 4. сохраняем график TOP‑10
 if not args.no_plot:
     top10 = stats.head(10)
     plt.figure(figsize=(8, 4))
