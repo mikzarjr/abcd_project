@@ -19,7 +19,7 @@ ap.add_argument("--th", dest="th", type=float, default=0.25,
 args = ap.parse_args()
 
 if not args.in_file:
-    args.in_file = sorted(glob.glob("data/*messages*.csv"))[0]
+    args.in_file = sorted(glob.glob("../data/*messages*.csv"))[0]
 print("[INFO] Файл:", args.in_file)
 
 # читаем категории
@@ -75,11 +75,11 @@ df["category"] = assigned
 
 # сохранение
 base = Path(args.in_file).with_suffix("").name
-out_csv = f"data/{base}_labeled.csv"
+out_csv = f"../data/{base}_labeled.csv"
 df[["date", "author", "text", "category"]].to_csv(out_csv, index=False, encoding="utf-8")
 
 stats = df["category"].value_counts().rename_axis("category").reset_index(name="count")
-stats.to_csv(f"data/{base}_stats.csv", index=False, encoding="utf-8")
+stats.to_csv(f"../data/{base}_stats.csv", index=False, encoding="utf-8")
 
 print("✅ labeled CSV  →", out_csv)
-print("   stats        →", f"data/{base}_stats.csv")
+print("   stats        →", f"../data/{base}_stats.csv")

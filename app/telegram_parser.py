@@ -25,7 +25,7 @@ def parse_args():
     if not args.chat:
         args.chat = input("Введите @username канала: ").strip().lstrip("@")
     if not args.out:
-        args.out = f"data/{args.chat}_messages.csv"
+        args.out = f"../data/{args.chat}_messages.csv"
     return args
 
 
